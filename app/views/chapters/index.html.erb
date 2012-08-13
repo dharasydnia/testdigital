@@ -6,29 +6,29 @@
 <% end %>
 
 
-  <table border="0" width="100%">
-    <% @chapters.each do |chapter| %>
-      <tr>
-        <td><%=h "Chapter #{chapter.chapter_no}" %>&nbsp;<%=h chapter.title %></td>
-        <td>
-            <%= link_to image_tag('add.png'), new_chapter_path(:parent_id => chapter) %></u>
-            <%= link_to image_tag('edit.png'), edit_chapter_path(chapter) %>
-            <%= link_to image_tag('cancel.png'), chapter, :confirm => 'Are you sure?', :method => :delete %>
-        </td>
-      </tr>
-      <% if chapter.has_children? %>
-        <% chapter.children.each do |child| %>
-          <tr>
-            <td style="padding: 1% 1% 0% 11%;"><%= link_to "Subchapter #{child.chapter_no} #{child.title}", contents_path(:chapter_id => child.id) %></td>
-          </tr>
-        <% end %>
+<table border="0" width="100%">
+  <% @chapters.each do |chapter| %>
+    <tr>
+      <td><%=h "Chapter #{chapter.chapter_no}" %>&nbsp;<%=h chapter.title %></td>
+      <td>
+          <%= link_to image_tag('add.png'), new_chapter_path(:parent_id => chapter) %></u>
+          <%= link_to image_tag('edit.png'), edit_chapter_path(chapter) %>
+          <%= link_to image_tag('cancel.png'), chapter, :confirm => 'Are you sure?', :method => :delete %>
+      </td>
+    </tr>
+    <% if chapter.has_children? %>
+      <% chapter.children.each do |child| %>
+        <tr>
+          <td style="padding: 1% 1% 0% 11%;"><%= link_to "Subchapter #{child.chapter_no} #{child.title}", contents_path(:chapter_id => child.id) %></td>
+        </tr>
       <% end %>
     <% end %>
+  <% end %>
 
-    <tr>
-      <td colspan="5">&nbsp;</td>
-    </tr>
-    <tr>
-      <td align="left"><%= link_to "New Chapter", new_chapter_path %></td>
-    </tr>
-  </table>
+  <tr>
+    <td colspan="5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="left"><%= link_to "New Chapter", new_chapter_path %></td>
+  </tr>
+</table>
