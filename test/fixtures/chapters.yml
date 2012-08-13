@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyText
+  chapter_no: MyString
+  statutaryauthority: MyText
+  school_stage: MyString
+
+two:
+  title: MyText
+  chapter_no: MyString
+  statutaryauthority: MyText
+  school_stage: MyString

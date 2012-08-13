@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyText
+  number: 1
+  content_type: MyString
+  chapter_id: 1
+  source_note: MyString
+  statutaryauthority: MyText
+  unnumberedparagraph: MyText
+  parent_id: 1
+
+two:
+  title: MyText
+  number: 1
+  content_type: MyString
+  chapter_id: 1
+  source_note: MyString
+  statutaryauthority: MyText
+  unnumberedparagraph: MyText
+  parent_id: 1

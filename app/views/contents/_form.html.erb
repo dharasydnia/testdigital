@@ -1,0 +1,53 @@
+<% if flash[:notice] -%>
+  <p class='notice'><%=h flash[:notice] %></p>
+<% end %>
+   <% if flash[:error] -%>
+  <p class='error'><%=h flash[:error] %></p>
+<% end %>
+  
+<%= form_for @content do |f| %>
+  <% if @content.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@content.errors.count, "error") %> prohibited this content from being saved:</h2>
+
+      <ul>
+      <% @content.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :parent_id, :value => params[:parent_id] %>
+  <% if params[:parent_id] %>
+      <%= f.hidden_field :chapter_id, :value => @parentrecord.chapter_id %>
+  <% else %>
+    <p>
+      <%= collection_select(:content, :chapter_id, @chapters, :id, :title, {:prompt => true}) %>
+    </p>
+  <% end %>
+  
+  <p>
+    <%= f.label :title %>
+    <%= f.text_area :title, :rows => 2, :cols => 5 %>
+  </p>
+  <p>
+    <%= select(:content, :content_type, { "Section" => "Section", "Paragraph" => "Paragraph" }) %>
+    &nbsp;
+    <%= link_to "Create new chapter", new_chapter_path %>
+  </p>
+  
+  <p>
+    <%= f.label 'is numbered content?' %>
+    <%= f.check_box :number %>
+  </p>
+
+  <div id="isnumbered" style="display: none;">
+    <p>
+      <%= f.label :content_no %>
+      <%= f.text_field :content_no %>
+    </p>
+  </div>
+  
+  <p><%= f.submit %></p>
+<% end %>

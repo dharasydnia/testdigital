@@ -1,0 +1,50 @@
+<% if flash[:notice] -%>
+  <p class='notice'><%=h flash[:notice] %></p>
+<% end %>
+   <% if flash[:error] -%>
+  <p class='error'><%=h flash[:error] %></p>
+<% end %>
+<table>
+  <tr>
+    <td><% if @content.content_no && @content.content_no != '' && @content.content_no != nil %><%= @content.content_no + ". " %><% end %><%= @content.title %></td>
+  </tr>
+  <tr>
+    <td>
+      <% if @content.has_children? %>
+        <table>
+          <% @content.children.each do |child| %>
+          <tr>
+            <td style="padding-left:20px;" colspan="2"><% if child.content_no && child.content_no != '' && child.content_no != nil %><%= child.content_no + ". " %><% end %><%= child.title %></td>
+          </tr>
+          <tr>
+            <td style="padding-left:40px;" colspan="2">
+              <% if child.has_children? %>
+                <table>
+                  <% child.children.each do |subchild| %>
+                  <tr>
+                    <td style="padding-left:20px;" colspan="2"><% if subchild.content_no && subchild.content_no != '' && subchild.content_no != nil %><%= subchild.content_no + ". " %><% end %><%= subchild.title %></td>
+                  </tr>
+                  <% end %>
+                </table>
+              <% else %>
+                <br />No Child Yet Created.
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </table>
+      <% else %>
+        <br />No Child Yet Created.
+      <% end %>
+    </td>
+    
+  </tr>
+  <tr><td>&nbsp;</td></tr>
+  <tr>
+    <td colspan="2">
+      <%= link_to 'Edit', edit_content_path(@content) %> |
+      <%= link_to 'Delete', @content, :confirm => 'Are you sure want to delete this content?', :method => :delete %> |
+      <%= link_to 'Back', contents_path %>
+    </td>
+  </tr>
+</table>

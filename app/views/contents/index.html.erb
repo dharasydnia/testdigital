@@ -1,0 +1,35 @@
+<% if flash[:notice] -%>
+  <p class='notice'><%=h flash[:notice] %></p>
+<% end %>
+<% if flash[:error] -%>
+  <p class='error'><%=h flash[:error] %></p>
+<% end %>
+
+<% @chapter.each do |chap| %>
+  <p class="firstline">
+    <%=h "#{'Chapter '}#{chap.parent.chapter_no}. #{chap.parent.title}" %>
+    <br />
+    <%=h "#{'Subchapter '}#{chap.chapter_no}. #{chap.title}" %>
+  </p>
+  <hr />
+  <p class="STATUTORYAUTHORITY">
+    <%=h "#{'Statutary Authority: '}#{chap.statutaryauthority}. #{chap.parent.title}" %>
+  </p>
+<% end %>
+
+<table border="0" width="100%">
+  <% @contents.each do |content| %>
+    <tr>
+      <td><b><%=h "§#{content.chapter.parent.chapter_no}.#{content.content_no}.#{content.title}" %></b></td>
+    </tr>
+    <% if content.has_children? %>
+      <% content.children.each do |first_child| %>
+        <tr>
+          <td style="padding: 1% 1% 0% 1%">
+            <%=h "#{first_child.content_no} #{first_child.title}" %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  <% end %>
+</table>
